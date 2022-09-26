@@ -1,2 +1,2 @@
-# fullstack-js-project-using-nodejs-
+# fullstack-js-project-using-nodejs
 First project using nodejs backend
