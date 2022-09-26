@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Student Information System
+        </title>
+        <style>
+            #heading{
+                text-align: center;
+                margin-bottom: 75px;
+            }
+            #div2{
+                height: 50px;
+                margin-top: 20px;
+            }
+            .search_record{
+                padding-top: 20px;
+                padding-bottom: 20px;
+                border: 2px solid green;
+                text-align: center;
+                margin-left: 500px;
+                margin-right: 500px;
+            }
+            #rollno{
+                height: 25px;
+                margin-right: 22px;
+                width: 200px;
+            }
+            #search{
+                height: 31px;
+                width: 120px;
+                font-size: large;
+            }
+            label{
+                margin-right: 22px;
+                font-size: 25px;
+            }
+            #div3{
+                margin-top: 30px;
+                height: 500px;
+                padding-bottom: 50px;
+                display: none;
+            }
+            #display{
+                height: 450px;
+                margin-top: 40px;
+                margin-right: 300px;
+                margin-bottom: 20px;
+                margin-left: 400px;
+                padding-top: 50px;
+            }
+            table{
+                border: 1px solid black;
+                border-collapse: collapse;
+                height: 350px;
+                width: 400px;
+            }
+            tr{
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            td{
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            .fieldname{
+                text-align: right;
+                padding-right: 20px;
+            }
+            .fieldvalues{
+                text-align: left;
+                padding-left: 20px;
+            }
+            #studentinfo{
+                margin: auto;
+            }
+            #div4{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="div1">
+            <div id="heading"><h1>Student Information System</h1></div>
+        </div>
+        <div id="div2">
+            <div class="search_record">
+                <form">
+                    <label for="rollno" ><b>Enter Roll Number: </b></label>  
+                    <input type="text" id="rollno" name="rollno">
+                    <input type="button" value="search" id="search" onclick="loadDetails()">
+                </form>
+            </div>
+        </div>
+        <div id="div3">
+            <div id="display">
+                <table id="studentinfo">
+                    <tr>
+                        <td class="fieldname" id="field1">Student Name</td>
+                        <td class="fieldvalues" id="studentname"></td>
+                    </tr>
+                    <tr>
+                        <td class="fieldname">Age</td>
+                        <td class="fieldvalues" id="age"></td>
+                    </tr>
+                    <tr>
+                        <td class="fieldname">Gender</td>
+                        <td class="fieldvalues" id="gender"></td>
+                    </tr>
+                    <tr>
+                        <td class="fieldname">House</td>
+                        <td class="fieldvalues" id="house"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="div4">
+            <div id="message">Entered roll no. doesn't exists.</div>
+        </div>
+        <script type="text/javascript">
+            function loadDetails(){
+                
+                const xhr = new XMLHttpRequest();
+                const value = document.getElementById('rollno').value;
+                console.log(value);
+                const data = {"rollno.": value};
+
+                xhr.onload = function() {
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+                    console.log(typeof data);
+                    if (Object.keys(data).length != 0) {
+                        document.getElementById("div3").style.display = "block";
+                        document.getElementById("studentname").innerHTML = data["student_name"];
+                        document.getElementById("age").innerHTML = data["age"];
+                        document.getElementById("gender").innerHTML = data["gender"];
+                        document.getElementById("house").innerHTML = data["house"];
+                        document.getElementById("div4").style.display = "none";
+                        
+                    }
+                    else {
+                        document.getElementById("div3").style.display = "none";
+                        document.getElementById("div4").style.display = "block";
+                        document.getElementById("div4").style.textAlign = "center";
+                        document.getElementById("div4").style.color = "red";
+                        document.getElementById("div4").style.margin = "10px";
+
+                    }
+                }
+
+
+                xhr.open('POST', '/');
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.setRequestHeader("Accept", "application/json");
+
+                xhr.send(JSON.stringify(data));
+            }
+        </script>
+    </body>    
+</html>

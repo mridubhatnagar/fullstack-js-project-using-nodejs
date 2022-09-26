@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static('./'));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + "/student_info_without_ajax.html");
+  res.sendFile(__dirname + "/student_information.html");
 });
 
 app.post("/", (req, res) => {
