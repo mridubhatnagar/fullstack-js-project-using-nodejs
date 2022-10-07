@@ -1,8 +1,14 @@
-function loadDetails(endpoint, method, id){
+async function loadDetails(endpoint, method, id){
     const value = document.getElementById(id).value;
     console.log(value);
-    const data = {"rollno.": value};  
-    fetch(endpoint, {
+    var inputData = {"rollno.": value};
+    result = await callApi(endpoint, method, inputData)
+    console.log(result);
+    displayResult(result);
+}
+
+async function callApi(endpoint, method, data) {
+    const returnJSON = fetch(endpoint, {
         method: method,
         headers: {
         "Accept": "application/json, text/plain, */*",
@@ -13,17 +19,18 @@ function loadDetails(endpoint, method, id){
     .then(function(res){
         return res.json()
     })
-    .then(function(data){
-        if (Object.keys(data).length != 0) {
-                showDetails(data);
-                
-            }
-            else {
-                hideDetails();
+    return await returnJSON
+}
 
-            }
-    })
+function displayResult(data) {
+    if (Object.keys(data).length != 0) {
+        showDetails(data);
+        
+    }
+    else {
+        hideDetails();
 
+    }
 }
 
 function showDetails(data) {
