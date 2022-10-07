@@ -17,8 +17,8 @@ function fetchPromiseValue(promise) {
     })
 }
 
-async function callApi(endpoint, method, data) {
-    const returnJSON = await fetch(endpoint, {
+function callApi(endpoint, method, data) {
+    const returnJSON = fetch(endpoint, {
         method: method,
         headers: {
         "Accept": "application/json, text/plain, */*",
