@@ -1,9 +1,9 @@
-function loadDetails(){
-    const value = document.getElementById('rollno').value;
+function loadDetails(endpoint, method, id){
+    const value = document.getElementById(id).value;
     console.log(value);
     const data = {"rollno.": value};  
-    fetch("/", {
-        method: "POST",
+    fetch(endpoint, {
+        method: method,
         headers: {
         "Accept": "application/json, text/plain, */*",
         "content-type": "application/json"
