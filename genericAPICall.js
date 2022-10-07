@@ -19,7 +19,7 @@ function loadDetails(){
                 
             }
             else {
-                hideDetails(data);
+                hideDetails();
 
             }
     })
@@ -35,7 +35,7 @@ function showDetails(data) {
     document.getElementById("div4").style.display = "none";
 }
 
-function hideDetails(data) {
+function hideDetails() {
     document.getElementById("div3").style.display = "none";
     document.getElementById("div4").style.display = "block";
     document.getElementById("div4").style.textAlign = "center";
