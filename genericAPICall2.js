@@ -6,14 +6,12 @@ function loadDetails(endpoint, method, id){
     var inputData = {"rollno.": value};
     
     var promise = Promise.resolve(callApi(endpoint, method, inputData))
-    
     fetchPromiseValue(promise);
 }
 
 function fetchPromiseValue(promise) {
     promise.then(function(value) {
-        var result = value;
-        displayResult(result); 
+        displayResult(value);
     })
 }
 
